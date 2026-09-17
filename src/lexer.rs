@@ -236,9 +236,14 @@ mod tests {
     }
 
     #[test]
-    fn rejects_unknown_identifier() {
+    fn tokenizes_identifier() {
         let mut lexer = Lexer::new("hello");
 
-        assert!(lexer.tokenize().is_err());
+        let tokens = lexer.tokenize().unwrap();
+
+        assert_eq!(
+            tokens,
+            vec![Token::Identifier("hello".to_string()), Token::Eof]
+        );
     }
 }

@@ -82,36 +82,36 @@ impl Interpreter {
             },
         }
     }
-}
 
-fn evaluate_value(&self, expression: &Expr) -> Value {
-    match expression {
-        Expr::String(value) => Value::String(value.clone()),
+    fn evaluate_value(&self, expression: &Expr) -> Value {
+        match expression {
+            Expr::String(value) => Value::String(value.clone()),
 
-        Expr::Number(value) => Value::Number(*value),
+            Expr::Number(value) => Value::Number(*value),
 
-        Expr::Identifier(name) => self
-            .variables
-            .get(name)
-            .cloned()
-            .unwrap_or_else(|| panic!("Undefined variable: {}", name)),
+            Expr::Identifier(name) => self
+                .variables
+                .get(name)
+                .cloned()
+                .unwrap_or_else(|| panic!("Undefined variable: {}", name)),
 
-        Expr::Binary {
-            left,
-            operator,
-            right,
-        } => {
-            let left = self.evaluate_number(left);
-            let right = self.evaluate_number(right);
+            Expr::Binary {
+                left,
+                operator,
+                right,
+            } => {
+                let left = self.evaluate_number(left);
+                let right = self.evaluate_number(right);
 
-            let result = match operator {
-                BinaryOperator::Add => left + right,
-                BinaryOperator::Subtract => left - right,
-                BinaryOperator::Multiply => left * right,
-                BinaryOperator::Divide => left / right,
-            };
+                let result = match operator {
+                    BinaryOperator::Add => left + right,
+                    BinaryOperator::Subtract => left - right,
+                    BinaryOperator::Multiply => left * right,
+                    BinaryOperator::Divide => left / right,
+                };
 
-            Value::Number(result)
+                Value::Number(result)
+            }
         }
     }
 }

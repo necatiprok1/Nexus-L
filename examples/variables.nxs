@@ -1,0 +1,8 @@
+let name = "Nexus"
+let age = 1
+let x = 10
+let y = 20
+
+print(name)
+print(age)
+print(x + y)
